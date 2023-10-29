@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CoinPayController;
+use App\Http\Controllers\CoinBaseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-Route::post('/process', [CoinPayController::class, 'process'])->name('payment.process');
-Route::get('/completed', [CoinPayController::class, 'completed'])->name('payment.completed');
-Route::get('/canceled', [CoinPayController::class, 'canceled'])->name('payment.canceled');
+Route::post('/process', [CoinBaseController::class, 'process'])->name('payment.process');
+Route::get('/completed', [CoinBaseController::class, 'completed'])->name('payment.completed');
+Route::get('/canceled', [CoinBaseController::class, 'canceled'])->name('payment.canceled');

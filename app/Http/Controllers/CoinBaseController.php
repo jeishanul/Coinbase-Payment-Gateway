@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CoinPayController extends Controller
+class CoinBaseController extends Controller
 {
     public function process()
     {
