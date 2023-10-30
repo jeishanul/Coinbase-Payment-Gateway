@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PaymentRequest;
+use Exception;
 use Illuminate\Http\Request;
 
 class CoinBaseController extends Controller
 {
-    public function process()
+    public function process(PaymentRequest $request)
     {
         try {
             $coin_pay_api_key = env('COIN_PAY_API_KEY');
@@ -15,7 +17,7 @@ class CoinBaseController extends Controller
                 'description' => "Pay for testing purpose",
                 'pricing_type' => 'fixed_price',
                 'local_price' => [
-                    'amount' => 10,
+                    'amount' => $request->amount,
                     'currency' => 'USD'
                 ],
                 'redirect_url' => route('payment.completed'),
@@ -33,8 +35,8 @@ class CoinBaseController extends Controller
             ]);
             $url  = json_decode($response->getBody()->getContents())->data->hosted_url;
             return redirect()->to($url);
-        } catch (\Exception $ex) {
-            dd($ex->getMessage());
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Please provide a valid coin base API key');
         }
     }
 

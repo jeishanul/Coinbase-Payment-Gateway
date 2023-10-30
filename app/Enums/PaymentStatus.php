@@ -5,6 +5,6 @@ namespace App\Enums;
 enum PaymentStatus: string
 {
     case PAID = 'Paid';
-    case CANCELED = 'Canceled';
+    case FAILED = 'Failed';
     case REVIEWED = 'Reviewed';
 }
