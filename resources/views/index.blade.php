@@ -52,6 +52,15 @@
         border-radius: 5px;
     }
 
+    .success-message {
+        position: absolute;
+        margin-bottom: 100px;
+        color: green;
+        background-color: #0080001a;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
+
     span {
         position: absolute;
         margin-top: 52px;
@@ -65,6 +74,11 @@
         @if (session('error'))
             <div class="error-message">
                 {{ session('error') }}
+            </div>
+        @endif
+        @if (session('success'))
+            <div class="success-message">
+                {{ session('success') }}
             </div>
         @endif
         <form action="{{ route('payment.process') }}" method="post">

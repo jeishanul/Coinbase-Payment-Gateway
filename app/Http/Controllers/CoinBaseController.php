@@ -7,6 +7,7 @@ use App\Http\Requests\PaymentRequest;
 use App\Models\Transaction;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CoinBaseController extends Controller
 {
@@ -17,6 +18,7 @@ class CoinBaseController extends Controller
 
     public function process(PaymentRequest $request)
     {
+        DB::beginTransaction();
         try {
             $coin_pay_api_key = env('COIN_PAY_API_KEY');
 
@@ -51,7 +53,9 @@ class CoinBaseController extends Controller
             $url  = json_decode($response->getBody()->getContents())->data->hosted_url;
 
             return redirect()->to($url);
+            DB::commit();
         } catch (Exception $e) {
+            DB::rollback();
             return redirect()->back()->with('error', 'Please provide a valid coin base API key');
         }
     }

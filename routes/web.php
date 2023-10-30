@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/', [CoinBaseController::class, 'index'])->name('index');
+Route::get('/', [CoinBaseController::class, 'index'])->name('index');
 Route::post('/process', [CoinBaseController::class, 'process'])->name('payment.process');
 Route::get('/completed/{transaction}', [CoinBaseController::class, 'completed'])->name('payment.completed');
 Route::get('/canceled/{transaction}', [CoinBaseController::class, 'canceled'])->name('payment.canceled');
